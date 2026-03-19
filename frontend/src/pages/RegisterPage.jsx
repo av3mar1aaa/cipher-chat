@@ -45,8 +45,8 @@ export default function RegisterPage() {
       setError('ОШИБКА: Пароли не совпадают');
       return;
     }
-    if (password.length < 4) {
-      setError('ОШИБКА: Пароль должен содержать минимум 4 символа');
+    if (password.length < 6) {
+      setError('ОШИБКА: Пароль должен содержать минимум 6 символов');
       return;
     }
 

@@ -21,7 +21,8 @@ const useStore = create(
       // --- auth ---
       login: async (username, password) => {
         const data = await api.login(username, password);
-        set({ user: data.user, token: data.access_token });
+        const user = { id: data.user_id, username: data.username, display_name: data.display_name };
+        set({ user, token: data.access_token });
         api.setToken(data.access_token);
         get().connectWS();
         return data;
@@ -29,7 +30,8 @@ const useStore = create(
 
       register: async (username, password, displayName) => {
         const data = await api.register(username, password, displayName);
-        set({ user: data.user, token: data.access_token });
+        const user = { id: data.user_id, username: data.username, display_name: data.display_name };
+        set({ user, token: data.access_token });
         api.setToken(data.access_token);
         get().connectWS();
         return data;
