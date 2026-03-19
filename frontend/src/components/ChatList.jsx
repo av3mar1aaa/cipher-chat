@@ -12,7 +12,7 @@ function formatTime(dateStr) {
   if (diffDays === 0) {
     return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   } else if (diffDays === 1) {
-    return 'Yesterday';
+    return 'Вчера';
   } else if (diffDays < 7) {
     return d.toLocaleDateString([], { weekday: 'short' });
   }
@@ -23,9 +23,9 @@ function getChatName(chat, currentUserId) {
   if (chat.name) return chat.name;
   if (chat.type === 'private' && chat.participants) {
     const other = chat.participants.find((p) => p.id !== currentUserId);
-    return other?.display_name || other?.username || 'Unknown';
+    return other?.display_name || other?.username || 'Неизвестный';
   }
-  return 'Chat';
+  return 'Чат';
 }
 
 function getChatAvatar(chat, currentUserId) {
@@ -61,7 +61,7 @@ export default function ChatList({ onMobileSelect }) {
         <FiSearch className="search-icon" />
         <input
           type="text"
-          placeholder="Search transmissions..."
+          placeholder="Поиск чатов..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -70,7 +70,7 @@ export default function ChatList({ onMobileSelect }) {
       <div className="chat-list__items">
         {isLoadingChats ? (
           <div className="chat-list__loading">
-            <span className="text-dim">Scanning channels</span>
+            <span className="text-dim">Загрузка чатов</span>
             <span className="loading-dots">
               <span>.</span><span>.</span><span>.</span>
             </span>
@@ -78,7 +78,7 @@ export default function ChatList({ onMobileSelect }) {
         ) : filteredChats.length === 0 ? (
           <div className="chat-list__empty">
             <span className="text-dim">
-              {search ? 'No results found' : 'No transmissions yet'}
+              {search ? 'Ничего не найдено' : 'Пока нет чатов'}
             </span>
           </div>
         ) : (
@@ -110,7 +110,7 @@ export default function ChatList({ onMobileSelect }) {
                   <div className="chat-item__bottom">
                     <span className="chat-item__preview">
                       {lastMsg?.is_deleted
-                        ? 'message deleted'
+                        ? 'сообщение удалено'
                         : lastMsg?.content || ''}
                     </span>
                     {unread > 0 && (

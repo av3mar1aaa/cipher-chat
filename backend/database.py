@@ -124,6 +124,14 @@ messages = sqlalchemy.Table(
     sqlalchemy.Column("deleted", sqlalchemy.Boolean, nullable=False, default=False),
 )
 
+# ---------------------------------------------------------------------------
+# Composite indexes for query performance
+# ---------------------------------------------------------------------------
+from sqlalchemy import Index
+
+Index('idx_messages_chat_created', messages.c.chat_id, messages.c.created_at)
+Index('idx_messages_unread', messages.c.chat_id, messages.c.sender_id, messages.c.is_read)
+Index('idx_chat_members_user', chat_members.c.user_id, chat_members.c.chat_id)
 
 # ---------------------------------------------------------------------------
 # Helpers

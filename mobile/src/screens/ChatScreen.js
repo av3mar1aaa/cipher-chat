@@ -101,7 +101,7 @@ export default function ChatScreen({ route, navigation }) {
                 ]}
               />
               <Text style={styles.headerStatus}>
-                {isOnline ? 'online' : 'offline'}
+                {isOnline ? 'в сети' : 'не в сети'}
               </Text>
             </View>
           )}
@@ -180,7 +180,7 @@ export default function ChatScreen({ route, navigation }) {
       }
       setInputText('');
     } catch (err) {
-      Alert.alert('Error', 'Failed to send message. Please try again.');
+      Alert.alert('Ошибка', 'Не удалось отправить сообщение. Попробуйте ещё раз.');
     } finally {
       setSending(false);
     }
@@ -191,8 +191,8 @@ export default function ChatScreen({ route, navigation }) {
       const permResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (!permResult.granted) {
         Alert.alert(
-          'Permission Required',
-          'Please allow access to your photo library.'
+          'Требуется разрешение',
+          'Пожалуйста, разрешите доступ к библиотеке фотографий.'
         );
         return;
       }
@@ -212,16 +212,16 @@ export default function ChatScreen({ route, navigation }) {
   };
 
   const handleDeleteMessage = (messageId) => {
-    Alert.alert('Delete Message', 'Are you sure you want to delete this message?', [
-      { text: 'Cancel', style: 'cancel' },
+    Alert.alert('Удалить сообщение?', 'Вы уверены, что хотите удалить это сообщение?', [
+      { text: 'Отмена', style: 'cancel' },
       {
-        text: 'Delete',
+        text: 'Удалить',
         style: 'destructive',
         onPress: async () => {
           try {
             await deleteMessage(messageId);
           } catch (err) {
-            Alert.alert('Error', 'Failed to delete message.');
+            Alert.alert('Ошибка', 'Не удалось удалить сообщение.');
           }
         },
       },
@@ -330,7 +330,7 @@ export default function ChatScreen({ route, navigation }) {
     if (typingFiltered.length === 0) return null;
     return (
       <View style={styles.typingContainer}>
-        <Text style={styles.typingText}>someone is typing...</Text>
+        <Text style={styles.typingText}>печатает...</Text>
       </View>
     );
   };
@@ -339,7 +339,7 @@ export default function ChatScreen({ route, navigation }) {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color={COLORS.green} />
-        <Text style={styles.loadingText}>Decrypting messages...</Text>
+        <Text style={styles.loadingText}>Расшифровка сообщений...</Text>
       </View>
     );
   }
@@ -398,7 +398,7 @@ export default function ChatScreen({ route, navigation }) {
 
         <TextInput
           style={styles.input}
-          placeholder="Type message..."
+          placeholder="Введите сообщение..."
           placeholderTextColor={COLORS.textDim}
           value={inputText}
           onChangeText={handleTextChange}

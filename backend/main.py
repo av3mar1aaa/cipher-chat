@@ -64,7 +64,10 @@ def hash_password(password: str) -> str:
 
 
 def verify_password(plain: str, hashed: str) -> bool:
-    return bcrypt.checkpw(plain.encode("utf-8"), hashed.encode("utf-8"))
+    try:
+        return bcrypt.checkpw(plain.encode("utf-8"), hashed.encode("utf-8"))
+    except Exception:
+        return False
 
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None) -> str:
@@ -109,7 +112,7 @@ async def get_current_user_record(user_id: int = Depends(get_current_user_id)) -
 # ---------------------------------------------------------------------------
 
 class RegisterRequest(BaseModel):
-    username: str = Field(..., min_length=3, max_length=64)
+    username: str = Field(..., min_length=3, max_length=64, pattern="^[a-zA-Z0-9_]+$")
     password: str = Field(..., min_length=6, max_length=256)
     display_name: str = Field(..., min_length=1, max_length=128)
 
@@ -220,7 +223,7 @@ app = FastAPI(title="CipherChat API", version="1.0.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -305,8 +308,8 @@ async def get_me(user: dict = Depends(get_current_user_record)):
         "username": user["username"],
         "display_name": user["display_name"],
         "avatar_url": user["avatar_url"],
-        "last_seen": user["last_seen"].isoformat() if user["last_seen"] else None,
-        "created_at": user["created_at"].isoformat() if user["created_at"] else None,
+        "last_seen": _serialize_dt(user["last_seen"]),
+        "created_at": _serialize_dt(user["created_at"]),
         "online": manager.is_online(user["id"]),
     }
 
@@ -334,6 +337,8 @@ async def search_users(q: str = Query("", min_length=1), _uid: int = Depends(get
 def _serialize_dt(dt: Any) -> str | None:
     if dt is None:
         return None
+    if isinstance(dt, str):
+        return dt
     if isinstance(dt, datetime):
         return dt.isoformat()
     return str(dt)
@@ -813,11 +818,17 @@ async def websocket_endpoint(websocket: WebSocket, token: str = Query(...)):
             if msg_type == "typing":
                 chat_id = data.get("chat_id")
                 if chat_id:
-                    await manager.broadcast_to_chat(
-                        chat_id,
-                        {"type": "typing", "chat_id": chat_id, "user_id": user_id},
-                        exclude_user=user_id,
+                    membership = await database.fetch_one(
+                        chat_members.select().where(
+                            (chat_members.c.chat_id == chat_id) & (chat_members.c.user_id == user_id)
+                        )
                     )
+                    if membership:
+                        await manager.broadcast_to_chat(
+                            chat_id,
+                            {"type": "typing", "chat_id": chat_id, "user_id": user_id},
+                            exclude_user=user_id,
+                        )
 
             elif msg_type == "read_receipt":
                 message_id = data.get("message_id")

@@ -73,8 +73,8 @@ export default function NewChatScreen({ navigation }) {
       const msg =
         err.response?.data?.detail ||
         err.response?.data?.message ||
-        'Failed to create chat.';
-      Alert.alert('Error', msg);
+        'Не удалось создать чат.';
+      Alert.alert('Ошибка', msg);
     } finally {
       setCreating(false);
     }
@@ -96,11 +96,11 @@ export default function NewChatScreen({ navigation }) {
 
   const handleCreateGroup = async () => {
     if (!groupName.trim()) {
-      Alert.alert('Error', 'Please enter a group name.');
+      Alert.alert('Ошибка', 'Пожалуйста, введите название группы.');
       return;
     }
     if (selectedUsers.length < 1) {
-      Alert.alert('Error', 'Please select at least one member.');
+      Alert.alert('Ошибка', 'Пожалуйста, выберите хотя бы одного участника.');
       return;
     }
 
@@ -113,8 +113,8 @@ export default function NewChatScreen({ navigation }) {
       const msg =
         err.response?.data?.detail ||
         err.response?.data?.message ||
-        'Failed to create group.';
-      Alert.alert('Error', msg);
+        'Не удалось создать группу.';
+      Alert.alert('Ошибка', msg);
     } finally {
       setCreating(false);
     }
@@ -166,13 +166,13 @@ export default function NewChatScreen({ navigation }) {
     if (!query.trim()) {
       return (
         <View style={styles.emptyContainer}>
-          <Text style={styles.emptyText}>Search for users to start chatting.</Text>
+          <Text style={styles.emptyText}>Найдите пользователей, чтобы начать общение.</Text>
         </View>
       );
     }
     return (
       <View style={styles.emptyContainer}>
-        <Text style={styles.emptyText}>No users found.</Text>
+        <Text style={styles.emptyText}>Пользователи не найдены</Text>
       </View>
     );
   };
@@ -191,7 +191,7 @@ export default function NewChatScreen({ navigation }) {
           <Text
             style={[styles.tabText, mode === 'private' && styles.tabTextActive]}
           >
-            Private
+            Личный
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -201,7 +201,7 @@ export default function NewChatScreen({ navigation }) {
           <Text
             style={[styles.tabText, mode === 'group' && styles.tabTextActive]}
           >
-            Group
+            Группа
           </Text>
         </TouchableOpacity>
       </View>
@@ -210,7 +210,7 @@ export default function NewChatScreen({ navigation }) {
       {mode === 'group' && (
         <TextInput
           style={styles.groupNameInput}
-          placeholder="group_name_"
+          placeholder="Название группы..."
           placeholderTextColor={COLORS.textDim}
           value={groupName}
           onChangeText={setGroupName}
@@ -238,7 +238,7 @@ export default function NewChatScreen({ navigation }) {
       {/* Search input */}
       <TextInput
         style={styles.searchInput}
-        placeholder="search_users_"
+        placeholder="Поиск пользователей..."
         placeholderTextColor={COLORS.textDim}
         value={query}
         onChangeText={handleSearchChange}
@@ -276,7 +276,7 @@ export default function NewChatScreen({ navigation }) {
           {creating ? (
             <ActivityIndicator size="small" color={COLORS.bg} />
           ) : (
-            <Text style={styles.createGroupText}>CREATE GROUP</Text>
+            <Text style={styles.createGroupText}>СОЗДАТЬ ГРУППУ</Text>
           )}
         </TouchableOpacity>
       )}
@@ -285,7 +285,7 @@ export default function NewChatScreen({ navigation }) {
       {creating && mode === 'private' && (
         <View style={styles.overlay}>
           <ActivityIndicator size="large" color={COLORS.green} />
-          <Text style={styles.overlayText}>Creating chat...</Text>
+          <Text style={styles.overlayText}>Создание чата...</Text>
         </View>
       )}
     </View>

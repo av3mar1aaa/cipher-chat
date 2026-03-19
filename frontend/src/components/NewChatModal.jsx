@@ -28,7 +28,7 @@ export default function NewChatModal({ onClose }) {
         // Filter out self
         setSearchResults(results.filter((u) => u.id !== user?.id));
       } catch (e) {
-        console.error('Search failed', e);
+        console.error('Ошибка поиска', e);
       } finally {
         setSearching(false);
       }
@@ -51,11 +51,11 @@ export default function NewChatModal({ onClose }) {
   const handleCreate = async () => {
     setError('');
     if (selectedUsers.length === 0) {
-      setError('Select at least one user');
+      setError('Выберите хотя бы одного пользователя');
       return;
     }
     if (mode === 'group' && !groupName.trim()) {
-      setError('Group name required');
+      setError('Введите название группы');
       return;
     }
 
@@ -73,7 +73,7 @@ export default function NewChatModal({ onClose }) {
       setActiveChat(chat);
       onClose();
     } catch (e) {
-      setError(e.response?.data?.detail || 'Failed to create chat');
+      setError(e.response?.data?.detail || 'Не удалось создать чат');
     } finally {
       setCreating(false);
     }
@@ -83,7 +83,7 @@ export default function NewChatModal({ onClose }) {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal__header">
-          <h2>NEW TRANSMISSION</h2>
+          <h2>НОВЫЙ ЧАТ</h2>
           <button className="icon-btn" onClick={onClose}>
             <FiX />
           </button>
@@ -97,7 +97,7 @@ export default function NewChatModal({ onClose }) {
               setSelectedUsers([]);
             }}
           >
-            <FiUser size={14} /> PRIVATE
+            <FiUser size={14} /> ЛИЧНЫЙ
           </button>
           <button
             className={`modal__tab ${mode === 'group' ? 'modal__tab--active' : ''}`}
@@ -106,7 +106,7 @@ export default function NewChatModal({ onClose }) {
               setSelectedUsers([]);
             }}
           >
-            <FiUsers size={14} /> GROUP
+            <FiUsers size={14} /> ГРУППА
           </button>
         </div>
 
@@ -114,7 +114,7 @@ export default function NewChatModal({ onClose }) {
           <div className="modal__group-name">
             <input
               type="text"
-              placeholder="Group name..."
+              placeholder="Название группы..."
               value={groupName}
               onChange={(e) => setGroupName(e.target.value)}
             />
@@ -125,7 +125,7 @@ export default function NewChatModal({ onClose }) {
           <FiSearch className="search-icon" />
           <input
             type="text"
-            placeholder="Search users..."
+            placeholder="Поиск пользователей..."
             value={searchQuery}
             onChange={(e) => handleSearch(e.target.value)}
             autoFocus
@@ -149,9 +149,9 @@ export default function NewChatModal({ onClose }) {
 
         <div className="modal__results">
           {searching ? (
-            <div className="modal__loading text-dim">Scanning network...</div>
+            <div className="modal__loading text-dim">Поиск в сети...</div>
           ) : searchResults.length === 0 && searchQuery.length >= 2 ? (
-            <div className="modal__loading text-dim">No users found</div>
+            <div className="modal__loading text-dim">Пользователи не найдены</div>
           ) : (
             searchResults.map((u) => {
               const isSelected = selectedUsers.find((s) => s.id === u.id);
@@ -187,14 +187,14 @@ export default function NewChatModal({ onClose }) {
 
         <div className="modal__footer">
           <button className="btn-cancel" onClick={onClose}>
-            CANCEL
+            ОТМЕНА
           </button>
           <button
             className="btn-create"
             onClick={handleCreate}
             disabled={creating || selectedUsers.length === 0}
           >
-            {creating ? 'ESTABLISHING...' : 'ESTABLISH LINK'}
+            {creating ? 'СОЗДАНИЕ...' : 'СОЗДАТЬ'}
           </button>
         </div>
       </div>

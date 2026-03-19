@@ -22,7 +22,7 @@ export default function RegisterPage() {
   const register = useStore((s) => s.register);
   const navigate = useNavigate();
 
-  const titleText = '> CREATING NEW IDENTITY...';
+  const titleText = '> СОЗДАНИЕ НОВОГО АККАУНТА...';
 
   useEffect(() => {
     let i = 0;
@@ -42,11 +42,11 @@ export default function RegisterPage() {
     setError('');
 
     if (password !== confirmPassword) {
-      setError('ERROR: Passwords do not match');
+      setError('ОШИБКА: Пароли не совпадают');
       return;
     }
     if (password.length < 4) {
-      setError('ERROR: Password must be at least 4 characters');
+      setError('ОШИБКА: Пароль должен содержать минимум 4 символа');
       return;
     }
 
@@ -56,7 +56,7 @@ export default function RegisterPage() {
       navigate('/chat');
     } catch (err) {
       setError(
-        err.response?.data?.detail || 'Identity creation failed. Try again.'
+        err.response?.data?.detail || 'Не удалось создать аккаунт. Попробуйте снова.'
       );
     } finally {
       setLoading(false);
@@ -76,13 +76,13 @@ export default function RegisterPage() {
           {error && <div className="auth-error">{error}</div>}
 
           <div className="input-group">
-            <label htmlFor="username">USERNAME</label>
+            <label htmlFor="username">ИМЯ ПОЛЬЗОВАТЕЛЯ</label>
             <input
               id="username"
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="choose_username"
+              placeholder="выберите_имя"
               autoComplete="username"
               required
               autoFocus
@@ -90,37 +90,37 @@ export default function RegisterPage() {
           </div>
 
           <div className="input-group">
-            <label htmlFor="displayName">DISPLAY_NAME</label>
+            <label htmlFor="displayName">ОТОБРАЖАЕМОЕ_ИМЯ</label>
             <input
               id="displayName"
               type="text"
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
-              placeholder="optional_display_name"
+              placeholder="необязательное_имя"
             />
           </div>
 
           <div className="input-group">
-            <label htmlFor="password">PASSWORD</label>
+            <label htmlFor="password">ПАРОЛЬ</label>
             <input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="create_password"
+              placeholder="создайте_пароль"
               autoComplete="new-password"
               required
             />
           </div>
 
           <div className="input-group">
-            <label htmlFor="confirmPassword">CONFIRM_PASSWORD</label>
+            <label htmlFor="confirmPassword">ПОДТВЕРДИТЕ_ПАРОЛЬ</label>
             <input
               id="confirmPassword"
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="repeat_password"
+              placeholder="повторите_пароль"
               autoComplete="new-password"
               required
             />
@@ -129,22 +129,22 @@ export default function RegisterPage() {
           <button type="submit" className="auth-button" disabled={loading}>
             {loading ? (
               <span className="loading-dots">
-                PROCESSING<span>.</span><span>.</span><span>.</span>
+                ОБРАБОТКА<span>.</span><span>.</span><span>.</span>
               </span>
             ) : (
-              '[ CREATE IDENTITY ]'
+              '[ СОЗДАТЬ АККАУНТ ]'
             )}
           </button>
         </form>
 
         <div className="auth-link">
-          <span className="text-dim">Already have access?</span>{' '}
-          <Link to="/login">&gt; ACCESS_SYSTEM</Link>
+          <span className="text-dim">Уже есть аккаунт?</span>{' '}
+          <Link to="/login">&gt; ВОЙТИ</Link>
         </div>
 
         <div className="auth-footer">
           <span className="text-dim">
-            // All communications encrypted end-to-end
+            // Все сообщения зашифрованы сквозным шифрованием
           </span>
         </div>
       </div>

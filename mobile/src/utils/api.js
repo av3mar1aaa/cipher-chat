@@ -5,8 +5,8 @@ import { useStore } from '../store/useStore';
 // CONFIGURATION - Change these to match your server IP address
 // ============================================================
 export const CONFIG = {
-  API_URL: 'http://YOUR_SERVER_IP:8000/api',
-  WS_URL: 'ws://YOUR_SERVER_IP:8000/ws',
+  API_URL: 'http://localhost:8000/api',
+  WS_URL: 'ws://localhost:8000/ws',
 };
 
 const api = axios.create({

@@ -31,7 +31,7 @@ export default function RegisterScreen({ navigation }) {
 
   const handleRegister = async () => {
     if (!username.trim() || !password.trim() || !displayName.trim()) {
-      setError('All fields are required.');
+      setError('Все поля обязательны для заполнения.');
       return;
     }
 
@@ -50,7 +50,7 @@ export default function RegisterScreen({ navigation }) {
       const msg =
         err.response?.data?.detail ||
         err.response?.data?.message ||
-        'Registration failed. Try a different username.';
+        'Ошибка регистрации. Попробуйте другое имя пользователя.';
       setError(msg);
     } finally {
       setLoading(false);
@@ -73,7 +73,7 @@ export default function RegisterScreen({ navigation }) {
 
           <TextInput
             style={styles.input}
-            placeholder="username_"
+            placeholder="имя_пользователя"
             placeholderTextColor={COLORS.textDim}
             value={username}
             onChangeText={setUsername}
@@ -84,7 +84,7 @@ export default function RegisterScreen({ navigation }) {
 
           <TextInput
             style={styles.input}
-            placeholder="display_name_"
+            placeholder="отображаемое_имя"
             placeholderTextColor={COLORS.textDim}
             value={displayName}
             onChangeText={setDisplayName}
@@ -94,7 +94,7 @@ export default function RegisterScreen({ navigation }) {
 
           <TextInput
             style={styles.input}
-            placeholder="password_"
+            placeholder="пароль"
             placeholderTextColor={COLORS.textDim}
             value={password}
             onChangeText={setPassword}
@@ -113,7 +113,7 @@ export default function RegisterScreen({ navigation }) {
             {loading ? (
               <ActivityIndicator color={COLORS.bg} size="small" />
             ) : (
-              <Text style={styles.buttonText}>CREATE IDENTITY</Text>
+              <Text style={styles.buttonText}>СОЗДАТЬ АККАУНТ</Text>
             )}
           </TouchableOpacity>
 
@@ -122,7 +122,7 @@ export default function RegisterScreen({ navigation }) {
             onPress={() => navigation.goBack()}
             disabled={loading}
           >
-            <Text style={styles.linkText}>Back to Login</Text>
+            <Text style={styles.linkText}>Войти в систему</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

@@ -63,7 +63,7 @@ export default function ChatPage() {
             <button
               className="icon-btn"
               onClick={handleLogout}
-              title="Logout"
+              title="Выйти"
             >
               <FiLogOut />
             </button>
@@ -75,7 +75,7 @@ export default function ChatPage() {
             className="new-chat-btn"
             onClick={() => setShowNewChat(true)}
           >
-            <FiPlus /> NEW TRANSMISSION
+            <FiPlus /> НОВЫЙ ЧАТ
           </button>
         </div>
 
@@ -94,7 +94,7 @@ export default function ChatPage() {
               {isLoadingMessages ? (
                 <div className="messages-loading">
                   <div className="terminal-loader">
-                    <span>DECRYPTING MESSAGES</span>
+                    <span>РАСШИФРОВКА СООБЩЕНИЙ</span>
                     <span className="loading-dots">
                       <span>.</span><span>.</span><span>.</span>
                     </span>
@@ -103,9 +103,9 @@ export default function ChatPage() {
               ) : messages.length === 0 ? (
                 <div className="messages-empty">
                   <div className="empty-icon">&gt;_</div>
-                  <p>No messages yet.</p>
+                  <p>Сообщений пока нет.</p>
                   <p className="text-dim">
-                    Start the encrypted conversation...
+                    Начните зашифрованную беседу...
                   </p>
                 </div>
               ) : (
@@ -130,7 +130,7 @@ export default function ChatPage() {
               {typingInfo && (
                 <div className="typing-indicator">
                   <span className="typing-name">{typingInfo.username}</span>
-                  <span className="text-dim"> is typing</span>
+                  <span className="text-dim"> печатает</span>
                   <span className="typing-dots">
                     <span>.</span><span>.</span><span>.</span>
                   </span>
@@ -152,13 +152,13 @@ export default function ChatPage() {
                     |_|
 `}</pre>
             <p className="text-dim">
-              Select a chat or start a new transmission
+              Выберите чат или начните новую беседу
             </p>
             <button
               className="new-chat-btn"
               onClick={() => setShowNewChat(true)}
             >
-              <FiPlus /> NEW TRANSMISSION
+              <FiPlus /> НОВЫЙ ЧАТ
             </button>
           </div>
         )}

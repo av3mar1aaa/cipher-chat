@@ -39,7 +39,7 @@ export default function LoginScreen({ navigation }) {
 
   const handleLogin = async () => {
     if (!username.trim() || !password.trim()) {
-      setError('All fields are required.');
+      setError('Все поля обязательны для заполнения.');
       return;
     }
 
@@ -54,7 +54,7 @@ export default function LoginScreen({ navigation }) {
       const msg =
         err.response?.data?.detail ||
         err.response?.data?.message ||
-        'Login failed. Check your credentials.';
+        'Ошибка входа. Проверьте ваши учётные данные.';
       setError(msg);
     } finally {
       setLoading(false);
@@ -77,7 +77,7 @@ export default function LoginScreen({ navigation }) {
 
           <TextInput
             style={styles.input}
-            placeholder="username_"
+            placeholder="имя_пользователя"
             placeholderTextColor={COLORS.textDim}
             value={username}
             onChangeText={setUsername}
@@ -88,7 +88,7 @@ export default function LoginScreen({ navigation }) {
 
           <TextInput
             style={styles.input}
-            placeholder="password_"
+            placeholder="пароль"
             placeholderTextColor={COLORS.textDim}
             value={password}
             onChangeText={setPassword}
@@ -107,7 +107,7 @@ export default function LoginScreen({ navigation }) {
             {loading ? (
               <ActivityIndicator color={COLORS.bg} size="small" />
             ) : (
-              <Text style={styles.buttonText}>ACCESS SYSTEM</Text>
+              <Text style={styles.buttonText}>ВОЙТИ В СИСТЕМУ</Text>
             )}
           </TouchableOpacity>
 
@@ -116,7 +116,7 @@ export default function LoginScreen({ navigation }) {
             onPress={() => navigation.navigate('Register')}
             disabled={loading}
           >
-            <Text style={styles.linkText}>Create Identity</Text>
+            <Text style={styles.linkText}>Создать аккаунт</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

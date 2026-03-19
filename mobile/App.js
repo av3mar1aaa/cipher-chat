@@ -72,12 +72,12 @@ function MainNavigator() {
       <MainStack.Screen
         name="NewChat"
         component={NewChatScreen}
-        options={{ title: 'New Chat' }}
+        options={{ title: 'Новый чат' }}
       />
       <MainStack.Screen
         name="Profile"
         component={ProfileScreen}
-        options={{ title: 'Profile' }}
+        options={{ title: 'Профиль' }}
       />
     </MainStack.Navigator>
   );

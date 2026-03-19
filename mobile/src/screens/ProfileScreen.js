@@ -20,10 +20,10 @@ export default function ProfileScreen({ navigation }) {
     .toUpperCase();
 
   const handleLogout = () => {
-    Alert.alert('Logout', 'Are you sure you want to disconnect?', [
-      { text: 'Cancel', style: 'cancel' },
+    Alert.alert('Выход', 'Вы уверены, что хотите отключиться?', [
+      { text: 'Отмена', style: 'cancel' },
       {
-        text: 'Logout',
+        text: 'Выйти',
         style: 'destructive',
         onPress: async () => {
           await logout();
@@ -64,7 +64,7 @@ export default function ProfileScreen({ navigation }) {
               { color: isOnline ? COLORS.green : COLORS.textDim },
             ]}
           >
-            {isOnline ? 'Online' : 'Offline'}
+            {isOnline ? 'В сети' : 'Не в сети'}
           </Text>
         </View>
 
@@ -77,7 +77,7 @@ export default function ProfileScreen({ navigation }) {
           onPress={handleLogout}
           activeOpacity={0.7}
         >
-          <Text style={styles.logoutText}>LOGOUT</Text>
+          <Text style={styles.logoutText}>ВЫЙТИ</Text>
         </TouchableOpacity>
 
         {/* Version */}

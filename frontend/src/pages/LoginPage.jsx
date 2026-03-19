@@ -26,7 +26,7 @@ export default function LoginPage() {
   const login = useStore((s) => s.login);
   const navigate = useNavigate();
 
-  const titleText = '> ACCESSING SECURE TERMINAL...';
+  const titleText = '> ПОДКЛЮЧЕНИЕ К ЗАЩИЩЁННОМУ ТЕРМИНАЛУ...';
 
   useEffect(() => {
     let i = 0;
@@ -50,7 +50,7 @@ export default function LoginPage() {
       navigate('/chat');
     } catch (err) {
       setError(
-        err.response?.data?.detail || 'Access denied. Invalid credentials.'
+        err.response?.data?.detail || 'Доступ запрещён. Неверные учётные данные.'
       );
     } finally {
       setLoading(false);
@@ -70,13 +70,13 @@ export default function LoginPage() {
           {error && <div className="auth-error">{error}</div>}
 
           <div className="input-group">
-            <label htmlFor="username">USERNAME</label>
+            <label htmlFor="username">ИМЯ ПОЛЬЗОВАТЕЛЯ</label>
             <input
               id="username"
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="enter_username"
+              placeholder="имя_пользователя"
               autoComplete="username"
               required
               autoFocus
@@ -84,13 +84,13 @@ export default function LoginPage() {
           </div>
 
           <div className="input-group">
-            <label htmlFor="password">PASSWORD</label>
+            <label htmlFor="password">ПАРОЛЬ</label>
             <input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="enter_password"
+              placeholder="введите_пароль"
               autoComplete="current-password"
               required
             />
@@ -99,22 +99,22 @@ export default function LoginPage() {
           <button type="submit" className="auth-button" disabled={loading}>
             {loading ? (
               <span className="loading-dots">
-                AUTHENTICATING<span>.</span><span>.</span><span>.</span>
+                АУТЕНТИФИКАЦИЯ<span>.</span><span>.</span><span>.</span>
               </span>
             ) : (
-              '[ ACCESS SYSTEM ]'
+              '[ ВОЙТИ В СИСТЕМУ ]'
             )}
           </button>
         </form>
 
         <div className="auth-link">
-          <span className="text-dim">No identity?</span>{' '}
-          <Link to="/register">&gt; CREATE_IDENTITY</Link>
+          <span className="text-dim">Нет аккаунта?</span>{' '}
+          <Link to="/register">&gt; СОЗДАТЬ_АККАУНТ</Link>
         </div>
 
         <div className="auth-footer">
           <span className="text-dim">
-            // All communications encrypted end-to-end
+            // Все сообщения зашифрованы сквозным шифрованием
           </span>
         </div>
       </div>

@@ -30,13 +30,7 @@ instance.interceptors.response.use(
 // --- Auth ---
 
 export async function login(username, password) {
-  // Backend expects form data for OAuth2
-  const form = new URLSearchParams();
-  form.append('username', username);
-  form.append('password', password);
-  const { data } = await instance.post('/auth/login', form, {
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-  });
+  const { data } = await instance.post('/auth/login', { username, password });
   return data;
 }
 
@@ -108,11 +102,9 @@ export async function getMe() {
 // --- Files ---
 
 export async function uploadFile(chatId, file) {
-  const form = new FormData();
-  form.append('file', file);
-  const { data } = await instance.post(`/chats/${chatId}/upload`, form, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  });
+  const formData = new FormData();
+  formData.append('file', file);
+  const { data } = await instance.post(`/chats/${chatId}/upload`, formData);
   return data;
 }
 

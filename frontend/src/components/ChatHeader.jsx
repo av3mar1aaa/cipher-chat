@@ -6,9 +6,9 @@ function getChatName(chat, currentUserId) {
   if (chat.name) return chat.name;
   if (chat.type === 'private' && chat.participants) {
     const other = chat.participants.find((p) => p.id !== currentUserId);
-    return other?.display_name || other?.username || 'Unknown';
+    return other?.display_name || other?.username || 'Неизвестный';
   }
-  return 'Chat';
+  return 'Чат';
 }
 
 function getOtherUser(chat, currentUserId) {
@@ -44,11 +44,11 @@ export default function ChatHeader({ onBack }) {
         <span className="chat-header__name">{chatName}</span>
         <span className="chat-header__status">
           {activeChat.type === 'group' ? (
-            <>{memberCount} members</>
+            <>{memberCount} участников</>
           ) : isOnline ? (
-            <span className="status-online">online</span>
+            <span className="status-online">в сети</span>
           ) : (
-            <span className="text-dim">offline</span>
+            <span className="text-dim">не в сети</span>
           )}
         </span>
       </div>

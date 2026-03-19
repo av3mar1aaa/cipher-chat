@@ -30,7 +30,7 @@ export default function MessageInput() {
         if (el) el.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     } catch (e) {
-      console.error('Failed to send message', e);
+      alert('Не удалось отправить сообщение. Попробуйте снова.');
     } finally {
       setSending(false);
     }
@@ -79,7 +79,7 @@ export default function MessageInput() {
         if (el) el.scrollIntoView({ behavior: 'smooth' });
       }, 200);
     } catch (err) {
-      console.error('Upload failed', err);
+      alert('Не удалось загрузить файл. Попробуйте снова.');
     } finally {
       setUploading(false);
       // Reset file input
@@ -101,7 +101,7 @@ export default function MessageInput() {
         className="icon-btn message-input__attach"
         onClick={handleFileClick}
         disabled={uploading}
-        title="Attach file"
+        title="Прикрепить файл"
       >
         <FiPaperclip />
       </button>
@@ -109,7 +109,7 @@ export default function MessageInput() {
       <textarea
         ref={textareaRef}
         className="message-input__field"
-        placeholder={uploading ? 'Uploading file...' : 'Type a message...'}
+        placeholder={uploading ? 'Загрузка файла...' : 'Введите сообщение...'}
         value={text}
         onChange={handleInput}
         onKeyDown={handleKeyDown}
@@ -121,7 +121,7 @@ export default function MessageInput() {
         className="icon-btn message-input__send"
         onClick={handleSend}
         disabled={!text.trim() || sending}
-        title="Send"
+        title="Отправить"
       >
         <FiSend />
       </button>

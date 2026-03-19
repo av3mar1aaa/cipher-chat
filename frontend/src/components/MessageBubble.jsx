@@ -57,7 +57,7 @@ export default function MessageBubble({ message, isOwn, showAvatar }) {
     try {
       await api.deleteMessage(activeChat.id, message.id);
     } catch (e) {
-      console.error('Failed to delete message', e);
+      console.error('Не удалось удалить сообщение', e);
     }
     setShowMenu(false);
   };
@@ -76,7 +76,7 @@ export default function MessageBubble({ message, isOwn, showAvatar }) {
         {!isOwn && !showAvatar && <div className="message__avatar-spacer" />}
         <div className="message__bubble message__bubble--deleted">
           <span className="message__deleted-text">
-            message was deleted
+            сообщение удалено
           </span>
         </div>
       </div>
@@ -109,7 +109,7 @@ export default function MessageBubble({ message, isOwn, showAvatar }) {
 
         {isImage ? (
           <div className="message__image">
-            <img src={imageUrl} alt="attachment" loading="lazy" />
+            <img src={imageUrl} alt="вложение" loading="lazy" />
           </div>
         ) : isFileUpload(content) ? (
           <a
@@ -118,7 +118,7 @@ export default function MessageBubble({ message, isOwn, showAvatar }) {
             rel="noopener noreferrer"
             className="message__file-link"
           >
-            [FILE] {content.split('/').pop()}
+            [ФАЙЛ] {content.split('/').pop()}
           </a>
         ) : (
           <div className="message__text">{content}</div>
@@ -152,14 +152,14 @@ export default function MessageBubble({ message, isOwn, showAvatar }) {
           }}
         >
           <button className="context-menu__item" onClick={handleCopy}>
-            <FiCopy size={14} /> Copy
+            <FiCopy size={14} /> Копировать
           </button>
           {isOwn && (
             <button
               className="context-menu__item context-menu__item--danger"
               onClick={handleDelete}
             >
-              <FiTrash2 size={14} /> Delete
+              <FiTrash2 size={14} /> Удалить
             </button>
           )}
         </div>

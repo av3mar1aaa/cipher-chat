@@ -243,7 +243,7 @@ const useStore = create(
               // Clear typing after 3s
               setTimeout(() => {
                 const current = get().typingUsers[data.chat_id];
-                if (current && Date.now() - current.timestamp >= 2900) {
+                if (current && Date.now() - current.timestamp >= 3000) {
                   const updated = { ...get().typingUsers };
                   delete updated[data.chat_id];
                   set({ typingUsers: updated });

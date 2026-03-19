@@ -180,8 +180,8 @@ export default function ChatListScreen({ navigation }) {
     if (loading) return null;
     return (
       <View style={styles.emptyContainer}>
-        <Text style={styles.emptyText}>No chats yet.</Text>
-        <Text style={styles.emptySubtext}>Start a conversation.</Text>
+        <Text style={styles.emptyText}>Пока нет чатов</Text>
+        <Text style={styles.emptySubtext}>Начните общение</Text>
       </View>
     );
   };
@@ -190,7 +190,7 @@ export default function ChatListScreen({ navigation }) {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color={COLORS.green} />
-        <Text style={styles.loadingText}>Loading chats...</Text>
+        <Text style={styles.loadingText}>Загрузка чатов...</Text>
       </View>
     );
   }
