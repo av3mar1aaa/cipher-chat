@@ -1,0 +1,41 @@
+{
+  "expo": {
+    "name": "CipherChat",
+    "slug": "cipher-chat",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0a0a0a",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0a0a0a"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.cipherchat.app",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSCameraUsageDescription": "CipherChat needs camera access to send photos",
+        "NSPhotoLibraryUsageDescription": "CipherChat needs photo library access to send images"
+      }
+    },
+    "android": {
+      "package": "com.cipherchat.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#0a0a0a",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-secure-store",
+      "expo-font"
+    ]
+  }
+}
