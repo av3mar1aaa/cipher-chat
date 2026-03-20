@@ -104,8 +104,27 @@ export async function getMe() {
 export async function uploadFile(chatId, file) {
   const formData = new FormData();
   formData.append('file', file);
-  const { data } = await instance.post(`/chats/${chatId}/upload`, formData);
+  const { data } = await instance.post('/upload', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
   return data;
+}
+
+export async function uploadAndSendMedia(chatId, file, type, onProgress) {
+  const formData = new FormData();
+  formData.append('file', file);
+  const { data: uploadData } = await instance.post('/upload', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+    onUploadProgress: onProgress
+      ? (e) => onProgress(Math.round((e.loaded * 100) / (e.total || 1)))
+      : undefined,
+  });
+  const { data: msgData } = await instance.post(`/chats/${chatId}/messages`, {
+    content: file.name || type,
+    type,
+    file_url: uploadData.file_url,
+  });
+  return msgData;
 }
 
 export default instance;

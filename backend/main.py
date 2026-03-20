@@ -138,7 +138,7 @@ class CreateChatRequest(BaseModel):
 
 class SendMessageRequest(BaseModel):
     content: str | None = None
-    type: str = Field("text", pattern="^(text|image|file)$")
+    type: str = Field("text", pattern="^(text|image|file|voice|video_circle|video)$")
     file_url: str | None = None
 
 
@@ -724,7 +724,7 @@ async def add_chat_member(chat_id: int, body: AddMemberRequest, user_id: int = D
 ALLOWED_EXTENSIONS = {
     ".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg",
     ".pdf", ".doc", ".docx", ".txt", ".zip", ".rar", ".7z",
-    ".mp3", ".mp4", ".wav", ".ogg", ".webm",
+    ".mp3", ".mp4", ".wav", ".ogg", ".webm", ".opus", ".m4a",
 }
 MAX_FILE_SIZE = 50 * 1024 * 1024  # 50 MB
 
